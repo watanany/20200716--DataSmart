@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<title>データ・スマート Excelではじめるデータサイエンス入門｜ダウンロードデータ</title>
+
+<style>
+body{
+margin: 0;
+line-height:1.8em;
+font-family:"メイリオ", "Meiryo", "ヒラギノ角ゴ Pro N W3", "Hiragino Kaku Gothic ProN", "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+header{
+width:800px;
+margin:2em auto;
+padding:0;
+}
+
+#content{
+width:800px;
+margin: auto;
+}
+    
+section h1{
+font-size: 1.4em;
+color:#FFF;
+margin:2.2em 0 -0.2em -0.2em;
+padding: 0.4em;
+background-color: #000;
+}
+
+section h2{
+font-size: 1.1em;
+margin:2em 0 -0.5em 0;
+}
+
+section p{
+margin-left:2em;
+}
+
+section div.url{
+border: 1px solid #000000;
+padding: 0.7em;
+background-color: #f2f2f2;
+margin-left:2em;
+}
+
+ul.folderlist{
+border-style:solid;
+border-width:2px;
+border-color:#000;
+margin-left:2em;
+padding:1em 2em;
+}
+
+ul.folderlist li{
+font-weight:bold;
+}
+
+ul.folderlist>li{
+font-size:0.9em;
+margin-top: 2em;
+}
+
+ul.folderlist li:first-child{
+margin-top: 0em;
+}
+
+
+ul.folderlist li span{
+font-weight:normal;
+}
+
+ol{
+margin-left:2em;
+list-style-type: decimal;
+}
+
+ol li{
+line-height:1.8em;
+font-size:0.95em;
+}
+
+ul.notice li{
+margin-bottom:1em
+}
+
+
+footer p small{
+display:block;
+font-size:1em;
+font-style:italic;
+border-style:solid;
+border-width:1px 0px 0px 0px;
+border-color:#000;
+padding-top:1em;
+margin-top:2em;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header><h1><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjEAAAE3CAMAAABsAOBGAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozZmUyZTQ0Yy04NmMxLTRmYTQtYmExNS01MGE2MGMwYTc2NWUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkYwRUEzRkE3NUNGMTFFNzlBQzRDRjYwN0E5RjY2MzgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkYwRUEzRjk3NUNGMTFFNzlBQzRDRjYwN0E5RjY2MzgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDphNzAxY2NlYi0yYTEzLTQ0YWUtOWY4ZC03NjdhZDU1NmNmYTgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M2ZlMmU0NGMtODZjMS00ZmE0LWJhMTUtNTBhNjBjMGE3NjVl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" alt="データ・スマート Excelではじめるデータサイエンス入門">
+</h1>
+</header>
+
+<div id="content">
+<section>
+<h1>ダウンロードデータについて</h1>
+<p>
+このたびは本書をお買い求めいただきまして、まことにありがとうございます。<br>
+本書の解説で利用しているExcelファイルやCSVファイルをダウンロードにてご提供しております。<br>
+ダウンロードデータは次のようなフォルダ構成になっています。<br>
+</p>
+<ul class="folderlist">
+		<li>CHAPTER01
+		<ul>
+		    <li>売店の売買.xlsx ── <span>CHPATER01の課題の初期状態ファイルです</span></li>
+		    <li>売店の売買_完成.xlsx ── <span>CHPATER01の課題の完成状態ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER02
+		<ul>
+		    <li>ワインK平均.xlsx ── <span>CHPATER02の課題の初期状態ファイルです</span></li>
+		    <li>ワインK平均_完成.xlsx ── <span>CHPATER02の課題の完成状態ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER03
+		<ul>
+		    <li>マンドリル.xlsx ── <span>CHPATER03の課題の初期状態ファイルです</span></li>
+		    <li>マンドリル_完成.xlsx ── <span>CHPATER03の課題の完成状態ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER04
+		<ul>
+		    <li>銃とバター.xlsx ── <span>ソルバー練習用の初期状態ファイルです</span></li>
+		    <li>銃とバター_完成.xlsx ── <span>ソルバー練習用の完成状態ファイルです</span></li>
+		    <li>オレンジジュースのブレンド.xlsx ── <span>メイン課題の初期状態ファイルです</span></li>
+		    <li>オレンジジュースのブレンド_完成.xlsx ── <span>メイン課題の完成状態ファイルです</span></li>
+		    <li>標準偏差.xlsx ── <span>標準偏差の計算ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER05
+		<ul>
+		    <li>フレンズグラフ.xlsx ── <span>練習用のフレンズのExcelファイルです</span></li>
+		    <li>ワイン卸売データ.xlsx ── <span>メイン課題の初期状態ファイルです</span></li>
+		    <li>ワイン卸売データ_完成.xlsx ── <span>メイン課題の完成状態ファイルです</span></li>
+		    <li>CSV
+               <ul>
+    		    <li>フレンズグラフ.csv ── <span>フレンズグラフをCSVに書き出して「;」に置換したファイルです</span></li>
+    		    <li>コサイン類似性.csv ── <span>類似性シートをCSVに書き出して「;」に置換したファイルです</span></li>
+    		    <li>r-近傍隣接.csv ── <span>r-近傍隣接シートをCSVに書き出して「;」に置換したファイルです</span></li>
+    		    <li>コミュニティGephi.csv ── <span>GephiからCSVに書き出したファイルです</span></li>
+		      </ul>
+		      </li>
+		</ul>
+		</li>
+		<li>CHAPTER06
+		<ul>
+		    <li>飼い猫.xlsx ── <span>単純な線形モデル例のファイルです</span></li>
+		    <li>リテールマート.xlsx ── <span>CHPATER06の課題の初期状態ファイルです</span></li>
+		    <li>リテールマート_完成.xlsx ── <span>CHPATER06の課題の完成状態ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER07
+		<ul>
+		    <li>アンサンブル.xlsx ── <span>CHPATER07の課題の初期状態ファイルです</span></li>
+		    <li>アンサンブル_完成.xlsm ── <span>CHPATER07の課題の完成状態ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER08
+		<ul>
+		    <li>剣の販売予想.xlsx ── <span>CHPATER08の課題の初期状態ファイルです</span></li>
+		    <li>剣の販売予想_完成.xlsm ── <span>CHPATER08の課題の完成状態ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER09
+		<ul>
+		    <li>妊娠期間.xlsx ── <span>単純な外れ値検出例の初期状態ファイルです</span></li>
+		    <li>妊娠期間_完成.xlsx ── <span>単純な外れ値検出例の完成状態ファイルです</span></li>
+		    <li>サポートセンター.xlsx ── <span>メイン課題の初期状態ファイルです</span></li>
+		    <li>サポートセンター_完成.xlsx ── <span>メイン課題の完成状態ファイルです</span></li>
+		</ul>
+		</li>
+		<li>CHAPTER10
+		<ul>
+		    <li>ワインK平均.csv ── <span>球面K平均法の読み込みデータです</span></li>
+		    <li>妊娠.csv ── <span>妊娠予測モデルの読み込みデータです</span></li>
+		    <li>妊娠_test.csv ── <span>妊娠予測モデルのテスト用読み込みデータです</span></li>
+		    <li>剣の需要.csv ── <span>剣の需要予想の読み込みデータです</span></li>
+		    <li>妊娠期間.csv ── <span>外れ値検出の読み込みデータです</span></li>
+		    <li>コールセンター.csv ── <span>外れ値検出の読み込みデータです</span></li>
+		</ul>
+		</li>
+
+	</ul>
+<p>
+ダウンロードファイルはxlsx、xlsmファイルともにWindows版Excel 2016のバージョンで保存されています。</p>
+
+<h2>Windowsでの解凍について</h2>
+<p>
+Windowsをご利用の場合は、ダウンロードしたファイルをダブルクリックしても正しく解凍できない場合があります。ファイルの操作に問題がある場合は、次の手順でファイルの解凍をお試しください。
+</p>
+<ol>
+<li>ダウンロードしたファイルを右クリック</li>
+<li>表示されたメニューから［すべてを展開...］を選択</li>
+<li>ファイルを解凍するダイアログが表示されるので、保存場所を選択して実行</li>
+<li>指定した場所にファイルが解凍される</li>
+</ol>
+
+<h2>Open Solverについて</h2>
+<p>
+本書中ではExcel 2016のソルバー機能の制限により、いくつかの課題でOpen SolverというExcelのアドインを利用しています。ただし、本書訳出時点（2017年6月）では、OpenSolverの最新版であるOpenSolver 2.8.6、および2.8.3～ 2.8.5のバージョンにおいて、一部の課題を解決することができません。このため、2017年6月時点では、Windows版（およびMacのExcel 2011）では2.8.2のバージョンをインストールすることをお勧めいたします。<br>
+OpenSolver 2.8.2をダウンロードするときは、まず下記のURLにアクセスします。
+</p>
+<div class="url">
+<a href="https://sourceforge.net/projects/opensolver/files/" target="_blank">https://sourceforge.net/projects/opensolver/files/</a>
+</div>
+<p>
+このリストの中からWindows版の場合は「OpenSolver2.8.2_LinearWin.zip」、Mac版のExcel 2011をご利用の場合は「OpenSolver2.8.2_LinearMac.zip」をクリックしてダウンロードしてください（Mac版のExcel 2016では動作しません）。また、実際のインストール方法については本書の第1章「OpenSolver：使わないに越したことはありませんが、ここでは必要です」をご覧ください。<br>
+なお、OpenSolver2.8.7以降のバージョンアップによりこれらの問題は解決される可能性があります。
+</p>
+<h2>LibreOfficeについて（Mac版のExcel 2016をご利用の場合）</h2>
+<p>
+本書の第4章には、Mac版のExcel 2016と上述のOpenSolverの組み合わせでは解決できない課題がいくつか出てきます。これはExcel 2016のセキュリティ仕様へのOpenSolverの対応が、本書刊行時点ではまだ限定的であるためです。<br>
+Mac版のExcel 2016以外のExcelを利用できない場合は、LibreOfficeの表計算ソフト「Calc」を使用すると解説内容を試すことができます。LibreOfficeはオープンソースのソフトウェアで、無料でダウンロードできます。下記URLよりダウンロードできます。
+</p>
+<div class="url">
+<a href="https://ja.libreoffice.org/" target="_blank">https://ja.libreoffice.org/</a>
+</div>
+<p>
+なお、LibreOfficeにて本書で活用する「ソルバー」の機能を利用するためには、Java SEのJDK（Java Developers Kit）をインストールする必要があります。JDKのダウンロードについては、下記のURLをご覧ください。
+</p>
+<div class="url">
+<a href="http://www.oracle.com/technetwork/jp/java/javase/downloads/" target="_blank">http://www.oracle.com/technetwork/jp/java/javase/downloads/</a>
+</div>
+</section>
+
+<section>
+<h1>ダウンロードデータに関するご注意</h1>
+<ul class="notice">
+<li>弊社Webサイトからダウンロードできるサンプルデータを実行した結果につきましては、著者、翻訳者、原板出版社、および株式会社エムディエヌコーポレーションは一切の責任を負いかねます。お客様の責任においてご利用ください。</li>
+</ul>
+</section>
+
+<footer>
+<p><small>Data Smart: Using Data Science to Transform Information into Insight by John W. Foreman
+Copyright &copy; 2014 by John Wiley & Sons, Inc., All Rights Reserved.<br>
+This translation published under license with the original publisher John Wiley & Sons, Inc.
+through Japan UNI Agency, Inc., Tokyo.<br>
+Japanese language edition copyright &copy; 2017 by MdN Corporation. All Rights Reserved.</small></p>
+</footer>
+
+</div>
+</body>
+
+</html>
