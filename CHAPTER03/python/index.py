@@ -34,6 +34,11 @@ def main():
     A = count(f(t) for t in APP_TWEETS_CSV['tweet'])
     B = count(f(t) for t in OTHER_TWEETS_CSV['tweet'])
 
+    p_a = { str(k): v / sum(A.values()) for k, v in A.items() }
+    p_b = { str(k): v / sum(B.values()) for k, v in B.items() }
+    tokens = sorted(A.keys() + B.keys())
+    np.array([A.get(t, 0) for t in tokens])
+
 
 if __name__ == '__main__':
     main()
