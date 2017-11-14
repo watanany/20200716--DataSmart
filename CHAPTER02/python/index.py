@@ -77,7 +77,7 @@ def main():
     pop = toolbox.population(n=300)
 
     print('Start of evolution')
-    print('  Evaluated %i individuals' % len(pop))
+    print('  Evaluated {} individuals'.format(len(pop)))
 
     for c in pop:
         c.fitness.values = toolbox.evaluate(c)
@@ -87,12 +87,12 @@ def main():
         pop[:] = children
 
         fits = np.array([c.fitness.values[0] for c in children])
-        print('-- Generation %i --' % generation)
+        print('-- Generation {} --'.format(generation))
         print('  Evaluated {} individuals'.format(len(empty_children)))
-        print('  Min %s' % fits.min())
-        print('  Max %s' % fits.max())
-        print('  Avg %s' % fits.mean())
-        print('  Std %s' % np.std(fits))
+        print('  Min {}'.format(fits.min()))
+        print('  Max {}'.format(fits.max()))
+        print('  Avg {}'.format(fits.mean()))
+        print('  Std {}'.format(np.std(fits)))
 
     print('-- End of (successful) evolution --')
 
