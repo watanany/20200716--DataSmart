@@ -7,8 +7,6 @@ from functools import reduce
 from toolz import compose
 from sklearn.naive_bayes import GaussianNB
 
-import IPython as ipy
-
 APP_TWEETS_CSV = pd.read_csv('./app_tweets.csv', quotechar='`')
 OTHER_TWEETS_CSV = pd.read_csv('./other_tweets.csv', quotechar='`')
 LABEL_APP = 0
@@ -41,14 +39,8 @@ def create_feature_vector(tokens, all_tokens):
     return np.array([C.get(t, 0) for t in all_tokens])
 
 def split_list(L, n):
-    result = []
-    for i in range(len(L)):
-        if i % (len(L) / n) != 0:
-            result[-1].append(L[i])
-        else:
-            result.append([])
-            result[-1].append(L[i])
-    return result
+    indices= [0] + [len(L) // i for i in range(n, 0, -1)]
+    return [L[i0:i1] for i0, i1 in zip(indices[0:], indices[1:])]
 
 def main():
     A = set(reduce(add, [preprocess(t) for t in APP_TWEETS_CSV['tweet']]))
