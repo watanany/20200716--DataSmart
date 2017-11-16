@@ -41,8 +41,8 @@ def calc_accuracy(labels, answer):
     return a / b
 
 def main():
-    A = set(reduce(add, [preprocess(t) for t in APP_TWEETS_CSV['tweet']]))
-    O = set(reduce(add, [preprocess(t) for t in OTHER_TWEETS_CSV['tweet']]))
+    A = { *reduce(add, [preprocess(t) for t in APP_TWEETS_CSV['tweet']]) }
+    O = { *reduce(add, [preprocess(t) for t in OTHER_TWEETS_CSV['tweet']]) }
     all_tokens = sorted(A | O)
 
     app_tweets_list = split_list(list(APP_TWEETS_CSV['tweet']), 2)
