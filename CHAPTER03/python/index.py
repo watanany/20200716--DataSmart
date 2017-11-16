@@ -28,12 +28,8 @@ def tokenize(text):
 def preprocess(tweet):
     return compose(tokenize, trim)(tweet)
 
-def count(tokens):
-    return { t: tokens.count(t) for t in set(tokens) }
-
 def create_feature_vector(tokens, all_tokens):
-    C = count(tokens)
-    return np.array([C.get(t, 0) for t in all_tokens])
+    return np.array([tokens.count(t) for t in all_tokens])
 
 def split_list(L, n):
     indices= [0] + [len(L) // i for i in range(n, 0, -1)]
