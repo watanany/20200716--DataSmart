@@ -29,10 +29,7 @@ def preprocess(tweet):
     return compose(tokenize, trim)(tweet)
 
 def count(tokens):
-    d = {}
-    for token in tokens:
-        d[token] = d.get(token, 0) + 1
-    return d
+    return { t: tokens.count(t) for t in set(tokens) }
 
 def create_feature_vector(tokens, all_tokens):
     C = count(tokens)
