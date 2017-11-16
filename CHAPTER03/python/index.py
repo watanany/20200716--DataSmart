@@ -42,6 +42,11 @@ def split_list(L, n):
     indices= [0] + [len(L) // i for i in range(n, 0, -1)]
     return [L[i0:i1] for i0, i1 in zip(indices[0:], indices[1:])]
 
+def calc_accuracy(labels, answer):
+    a = len([label for label in labels if label == answer])
+    b = len(labels)
+    return a / b
+
 def main():
     A = set(reduce(add, [preprocess(t) for t in APP_TWEETS_CSV['tweet']]))
     O = set(reduce(add, [preprocess(t) for t in OTHER_TWEETS_CSV['tweet']]))
@@ -62,8 +67,8 @@ def main():
 
     g = GaussianNB()
     g.fit(X, y)
-    print('label: {}'.format(g.predict(T_A)))
-    print('label: {}'.format(g.predict(T_O)))
+    print('accuracy(app):\t{:.1f}%'.format(calc_accuracy(g.predict(T_A), LABEL_APP) * 100.0))
+    print('accuracy(other):\t{:.1f}%'.format(calc_accuracy(g.predict(T_O), LABEL_OTHER) * 100.0))
 
 
 if __name__ == '__main__':
