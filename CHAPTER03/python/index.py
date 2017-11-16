@@ -36,7 +36,7 @@ def split_list(L, n):
     return [L[i0:i1] for i0, i1 in zip(indices[0:], indices[1:])]
 
 def calc_accuracy(labels, answer):
-    a = len([label for label in labels if label == answer])
+    a = len([la for la in labels if la == answer])
     b = len(labels)
     return a / b
 
