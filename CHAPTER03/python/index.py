@@ -7,8 +7,8 @@ from functools import reduce
 from toolz import compose
 from sklearn.naive_bayes import GaussianNB
 
-APP_TWEETS_CSV = pd.read_csv('./app_tweets.csv', quotechar='`')
-OTHER_TWEETS_CSV = pd.read_csv('./other_tweets.csv', quotechar='`')
+APP_TWEETS_CSV = pd.read_csv('./app_tweets.csv')
+OTHER_TWEETS_CSV = pd.read_csv('./other_tweets.csv')
 LABEL_APP = 0
 LABEL_OTHER = 1
 
