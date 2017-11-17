@@ -51,11 +51,8 @@ def update(toolbox, pop):
 
     for c1, c2 in mated_pairs:
         toolbox.mate(c1, c2)
-        del c1.fitness.values
-        del c2.fitness.values
     for c in mutated_children:
         toolbox.mutate(c)
-        del c.fitness.values
     for c in empty_children:
         c.fitness.values = toolbox.evaluate(c)
 
