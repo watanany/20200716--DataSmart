@@ -11,13 +11,8 @@ N = 4
 SALES_CSV = pd.read_csv('./sales.csv')
 TRADES_CSV = pd.read_csv('./trades.csv')
 NAMES = list(pd.read_csv('./names.csv').get('顧客名'))
-
-M = np.zeros((len(SALES_CSV), len(NAMES)))
-for title, group in TRADES_CSV.groupby(['顧客名', '売り出し番号']):
-    name, seq = title
-    M[seq - 1][NAMES.index(name)] = len(group)
-
 CXPB, MUTPB, NGEN = 0.5, 0.2, 1000
+M = TRADES_CSV.groupby(['売り出し番号', '顧客名']).size().unstack().fillna(0).values
 
 class Fitness(base.Fitness):
     def __init__(self, weights=(-1.0,), *args, **kwargs):
